@@ -14,5 +14,14 @@ const pay = () => {
       exp_month: formData.get("exp_month"),         //有効期限の月
       exp_year: `20${formData.get("exp_year")}`,    //有効期限の年
     };
+
+    Payjp.createToken(card, (status, response) => {
+      if (status === 200) {
+        const token = response.id;
+        const renderDom = document.getElementById("charge-form");
+        const tokenObj = `<input value=${token} name='card_token' type="hidden">`;
+        renderDom.insertAdjacentHTML("beforeend", tokenObj);
+      }
+    });
   });
 };
