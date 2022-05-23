@@ -1,7 +1,7 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); //環境変数を読み込む
-  const submit = document.getElementById("button"); //変数submitにid"button"の要素を取得し代入
-  submit.addEventListener("click", (e) => { //イベント発火
+    const submit = document.getElementById("button"); //変数submitにid"button"の要素を取得し代入
+    submit.addEventListener("click", (e) => { //イベント発火
     e.preventDefault(); //Railsのフォーム送信処理をキャンセルし、JavaScriptからサーバーサイドに値を送るようにする記述
 
     //カード情報の取得先
