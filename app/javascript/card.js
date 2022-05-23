@@ -15,6 +15,7 @@ const pay = () => {
       exp_year: `20${formData.get("exp_year")}`,    //有効期限の年
     };
 
+    //カードオブジェクトをPAY.JPに送信
     Payjp.createToken(card, (status, response) => {
       if (status === 200) {
         const token = response.id;
@@ -22,6 +23,16 @@ const pay = () => {
         const tokenObj = `<input value=${token} name='card_token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
+      //カード情報がparamsに含まれないための記述
+      document.getElementById("number").removeAttribute("name");
+      document.getElementById("cvc").removeAttribute("name");
+      document.getElementById("exp_month").removeAttribute("name");
+      document.getElementById("exp_year").removeAttribute("name");
+      
+      //トークンをコントローラーに送信
+      document.getElementById("charge-form").submit();
     });
   });
 };
+
+window.addEventListener("load", pay);
